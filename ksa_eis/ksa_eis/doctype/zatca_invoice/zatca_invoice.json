@@ -1,0 +1,146 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:EIS-{YYYY}-{MM}-{DD}-{####}",
+ "creation": "2023-02-01 19:28:52.137380",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "zatca_csid",
+  "invoice_type",
+  "xml_file",
+  "column_break_o4sc",
+  "qr_code_image",
+  "qr_code_text",
+  "xml_section",
+  "xml_document",
+  "validation_result",
+  "json_section",
+  "json_request",
+  "status_column",
+  "status",
+  "status_message",
+  "qr_code"
+ ],
+ "fields": [
+  {
+   "fieldname": "xml_file",
+   "fieldtype": "Attach",
+   "label": "XML File",
+   "reqd": 1
+  },
+  {
+   "fieldname": "validation_result",
+   "fieldtype": "Text",
+   "label": "Validation Result",
+   "read_only": 1
+  },
+  {
+   "fieldname": "json_request",
+   "fieldtype": "Text",
+   "label": "JSON Request",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "UNREPORTED\nREPORTED\nERROR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status_message",
+   "fieldtype": "Text",
+   "label": "Status Message",
+   "read_only": 1
+  },
+  {
+   "fieldname": "xml_document",
+   "fieldtype": "Text",
+   "label": "XML Document"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "xml_section",
+   "fieldtype": "Section Break",
+   "label": "XML"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "json_section",
+   "fieldtype": "Section Break",
+   "label": "JSON"
+  },
+  {
+   "fieldname": "zatca_csid",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "ZATCA CSID",
+   "options": "ZATCA CSID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status_column",
+   "fieldtype": "Section Break",
+   "label": "STATUS"
+  },
+  {
+   "fieldname": "invoice_type",
+   "fieldtype": "Select",
+   "label": "Invoice Type",
+   "options": "INVOICE\nCREDIT\nDEBIT",
+   "reqd": 1
+  },
+  {
+   "fieldname": "qr_code",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "QR Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qr_code_image",
+   "fieldtype": "Image",
+   "label": "QR Code Image",
+   "options": "qr_code"
+  },
+  {
+   "fieldname": "column_break_o4sc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qr_code_text",
+   "fieldtype": "Text",
+   "label": "QR Code Text",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-02-02 23:39:50.573607",
+ "modified_by": "Administrator",
+ "module": "KSA EIS",
+ "name": "ZATCA Invoice",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

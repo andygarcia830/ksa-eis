@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CSID-{csr}",
+ "creation": "2023-02-01 20:58:26.358139",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "csr",
+  "otp",
+  "csid",
+  "secret",
+  "status",
+  "prod_csid",
+  "prod_secret"
+ ],
+ "fields": [
+  {
+   "fieldname": "csr",
+   "fieldtype": "Link",
+   "label": "CSR",
+   "options": "ZATCA CSR"
+  },
+  {
+   "fieldname": "otp",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "OTP",
+   "reqd": 1
+  },
+  {
+   "fieldname": "csid",
+   "fieldtype": "Text",
+   "label": "CSID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "secret",
+   "fieldtype": "Data",
+   "label": "Secret",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prod_csid",
+   "fieldtype": "Text",
+   "label": "Prod CSID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prod_secret",
+   "fieldtype": "Data",
+   "label": "Prod Secret",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-02-02 10:15:04.001553",
+ "modified_by": "Administrator",
+ "module": "KSA EIS",
+ "name": "ZATCA CSID",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

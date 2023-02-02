@@ -1,0 +1,111 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CSR-{common_name}",
+ "creation": "2023-02-01 20:52:13.643683",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "common_name",
+  "serial_number",
+  "organization_identifier",
+  "organization_unit_name",
+  "organization_name",
+  "country_name",
+  "invoice_type",
+  "location_address",
+  "industry_business_category",
+  "csr"
+ ],
+ "fields": [
+  {
+   "fieldname": "common_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Common Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organization_identifier",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organization Identifier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organization_unit_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organization Unit Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "label": "Organization Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "country_name",
+   "fieldtype": "Data",
+   "label": "Country Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_type",
+   "fieldtype": "Data",
+   "label": "Invoice Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "location_address",
+   "fieldtype": "Data",
+   "label": "Location Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "industry_business_category",
+   "fieldtype": "Data",
+   "label": "Industry Business Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "csr",
+   "fieldtype": "Text",
+   "label": "csr",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-02-01 20:52:13.643683",
+ "modified_by": "Administrator",
+ "module": "KSA EIS",
+ "name": "ZATCA CSR",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
