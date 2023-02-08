@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-02-03 20:44:36.385579",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "csid",
+  "invoice_type",
+  "auto_report",
+  "xml_file"
+ ],
+ "fields": [
+  {
+   "fieldname": "csid",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "CSID",
+   "options": "ZATCA CSID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "xml_file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "XML File"
+  },
+  {
+   "fieldname": "invoice_type",
+   "fieldtype": "Select",
+   "label": "Invoice Type",
+   "options": "INVOICE\nDEBIT\nCREDIT"
+  },
+  {
+   "default": "0",
+   "fieldname": "auto_report",
+   "fieldtype": "Check",
+   "label": "Auto Report"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-02-04 00:20:20.207124",
+ "modified_by": "Administrator",
+ "module": "KSA EIS",
+ "name": "ZATCA Invoice Batch Upload",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
