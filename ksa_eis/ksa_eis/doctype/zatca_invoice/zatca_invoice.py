@@ -32,7 +32,7 @@ def populate_xml(f):
 def process_file(f):
 	doc_root=get_site_base_path()
 	f=doc_root+f
-	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/process_files.sh {f}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/services/process_files.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -63,7 +63,7 @@ def generate_json(f):
 	doc_root=get_site_base_path()
 	f=doc_root+f
 	t = f +'.json'
-	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_json.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/services/generate_json.sh {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -105,7 +105,7 @@ def generate_qr(f):
 	doc_root=get_site_base_path()
 	f=doc_root+f
 	t = f +'.json'
-	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_qr.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/services/generate_qr.sh {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))

@@ -21,7 +21,7 @@ def generate_csr(common_name,serial_number,organization_identifier,organization_
 	f.write(properties)
 	f.close()
 	input_path=get_site_base_path()+'/private/files/'
-	result= str(subprocess.check_output(f'../apps/ksa_eis/ksa_eis/services/generate_csr.sh {input_path}',shell=True))
+	result= str(subprocess.check_output(f'source ../apps/ksa_eis/ksa_eis/services/generate_csr.sh {input_path}',shell=True))
 	print(result)
 	filename=get_site_base_path()+'/private/files/generated_csr.csr'
 	f = open(filename, "r")

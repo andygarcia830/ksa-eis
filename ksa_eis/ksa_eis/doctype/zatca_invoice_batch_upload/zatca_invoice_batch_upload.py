@@ -80,11 +80,8 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report):
 	doc.insert()
 	
 
-# TODO: IMPORT THIS FROM zatca_invoice!!!
-#
-
 def process_file(f):
-	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/process_files.sh {f}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/services/process_files.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -113,7 +110,7 @@ def extract_validate_results(result ):
 @frappe.whitelist()
 def generate_json(f):
 	t = f +'.json'
-	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_json.sh  {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/services/generate_json.sh  {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -153,7 +150,7 @@ def submit_report(csid,jsn):
 @frappe.whitelist()
 def generate_qr(f):
 	t = f +'.json'
-	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_qr.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/services/generate_qr.sh {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
