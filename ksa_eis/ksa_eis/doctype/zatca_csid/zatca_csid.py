@@ -48,9 +48,9 @@ def fetch_csr(csr):
 	return doc.csr
 
 @frappe.whitelist()
-def onboard_csid(csid,secret):
-	jsn={'compliance_request_id':'1234567890123'}
-	print(f'onboard_csid {csid} {secret}')
+def onboard_csid(csid,secret,request_id):
+	jsn={'compliance_request_id':f'{request_id}'}
+	print(f'onboard_csid {csid} {secret} {request_id}')
 	return call_csid_onboading(csid,secret,jsn)
 
 

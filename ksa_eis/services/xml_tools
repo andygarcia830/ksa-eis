@@ -1,0 +1,293 @@
+import xmlschema
+
+class ZATCAXML:
+    invoiceData={}
+    additionalDocuments=[]
+    signature=[{'cbc:ID': 'urn:oasis:names:specification:ubl:signature:Invoice', 'cbc:SignatureMethod': 'urn:oasis:names:specification:ubl:dsig:enveloped:xades'}]
+
+    def __init__(self):
+       self.invoiceData['cac:Signature']=self.signature
+
+
+    # MANDATORY PARAMETERS
+
+    def set_id(self,val):
+        self.invoiceData['cbc:ID']=val
+    
+    def set_uuid(self,val):
+        self.invoiceData['cbc:UUID']=val
+
+    def set_issue_date(self,val):
+        self.invoiceData['cbc:IssueDate']=val
+
+    def set_issue_time(self,val):
+        self.invoiceData['cbc:IssueTime']=val
+        
+    def set_invoice_type_code(self,val):
+        self.invoiceData['cbc:InvoiceTypeCode']=val
+
+    def set_invoice_type_code_name(self,val,name):
+        nameEntry={'@name':name,'$':val}
+        self.invoiceData['cbc:InvoiceTypeCode']=nameEntry
+    
+    def set_document_currency_code(self,val):
+        self.invoiceData['cbc:DocumentCurrencyCode']=val
+    
+    def set_tax_currency_code(self,val):
+        self.invoiceData['cbc:TaxCurrencyCode']=val
+    
+    def set_invoice_counter_value(self,val):
+        entry={'cbc:ID':'ICV','cbc:UUID':val}
+        self.additionalDocuments.append(entry.copy())
+        self.invoiceData['cac:AdditionalDocumentReference']=self.additionalDocuments
+    
+    def set_previous_invoice_hash(self,val):
+        entry={'cbc:ID':'PIH','cac:Attachment':
+              {'cbc:EmbeddedDocumentBinaryObject':
+              {'@mimeCode':'text/plain','$':val}
+              }
+              }
+        self.additionalDocuments.append(entry)
+        self.invoiceData['cac:AdditionalDocumentReference']=self.additionalDocuments
+
+    def set_invoice_qr_code(self,val):
+        entry={'cbc:ID':'QR','cac:Attachment':
+              {'cbc:EmbeddedDocumentBinaryObject':
+              {'@mimeCode':'text/plain','$':val}
+              }
+              }
+        self.additionalDocuments.append(entry)
+        self.invoiceData['cac:AdditionalDocumentReference']=self.additionalDocuments
+    
+    def set_supplier_party(self,crn,street_name,building_number,plot_identification,subdivision_name,city_name,postal_zone,country,company_id,tax_scheme,registration_name):
+        entry={'cac:Party':
+                {'cac:PartyIdentification':
+                 [
+                 {'cbc:ID':{
+                 '@schemeID':'CRN',
+                 '$':crn
+                 }}],
+                 'cac:PostalAddress':{
+                 'cbc:StreetName':street_name,
+                 'cbc:BuildingNumber':building_number,
+                 'cbc:PlotIdentification':plot_identification,
+                 'cbc:CitySubdivisionName':subdivision_name,
+                 'cbc:CityName': city_name,
+                 'cbc:PostalZone':postal_zone,
+                 'cac:Country':{
+                 'cbc:IdentificationCode':country
+                 }},
+                 'cac:PartyTaxScheme':[{
+                 'cbc:CompanyID':company_id,
+                 'cac:TaxScheme': {
+                 'cbc:ID': tax_scheme
+                 }}],
+                'cac:PartyLegalEntity':[{
+                'cbc:RegistrationName': registration_name
+                 }]
+                
+                }}
+        self.invoiceData['cac:AccountingSupplierParty':]=entry
+    
+    def set_customer_party(self,nat,street_name,building_number,plot_identification,subdivision_name,city_name,postal_zone,country,company_id,tax_scheme,registration_name):
+        entry={'cac:Party':
+                {'cac:PartyIdentification':
+                 [
+                 {'cbc:ID':{
+                 '@schemeID':'NAT',
+                 '$':nat
+                 }}],
+                 'cac:PostalAddress':{
+                 'cbc:StreetName':street_name,
+                 'cbc:BuildingNumber':building_number,
+                 'cbc:PlotIdentification':plot_identification,
+                 'cbc:CitySubdivisionName':subdivision_name,
+                 'cbc:CityName': city_name,
+                 'cbc:PostalZone':postal_zone,
+                 'cac:Country':{
+                 'cbc:IdentificationCode':country
+                 }},
+                 'cac:PartyTaxScheme':[{
+                 'cbc:CompanyID':company_id,
+                 'cac:TaxScheme': {
+                 'cbc:ID': tax_scheme
+                 }}],
+                'cac:PartyLegalEntity':[{
+                'cbc:RegistrationName': registration_name
+                 }]
+                
+                }}
+        self.invoiceData['cac:AccountingSupplierParty']=entry
+
+    def set_delivery(self,val):
+        entry=[{'cbc:ActualDeliveryDate': val}]
+        self.invoiceData['cac:Delivery']=entry
+
+    def payment_means(self,val):
+        entry=[{'cbc:PaymentMeansCode': val}]
+        self.invoiceData['cac:PaymentMeans']=entry
+
+    def set_allowance_charge(self,charge_indicator,charge_reason,currency_id,amount,tax_category_id,scheme_agency_id,tax_category,percent,tax_scheme_id,tax_scheme_agency_id,tax_scheme):
+        entry=[{
+            'cbc:ChargeIndicator': charge_indicator,
+            'cbc:AllowanceChargeReason': [charge_reason],
+            'cbc:Amount':{
+            '@currencyID': currency_id,
+            '$':f'Decimal({amount})'
+            },
+            'cac:TaxCategory': [{
+            'cbc:ID': {
+            '@schemeID': tax_category_id,
+            '@schemeAgencyID':scheme_agency_id,
+            '$':tax_category
+            },
+            'cbc:Percent': f'Decimal({percent})',
+            'cac:TaxScheme': {
+            'cbc:ID': {
+            '@schemeID': tax_scheme_id,
+            '@schemeAgencyID': tax_scheme_agency_id,
+            '$':tax_scheme
+            }
+            }}
+            ]}
+            ]
+        self.invoiceData['cac:AllowanceCharge']=entry
+
+    # Parameters:
+    # amounts: list of dicts with keys currency_id and amount
+    def set_tax_total(self,currency_id,amounts,taxable_amount,tax_amount,tax_category_scheme_id,tax_category_scheme_agency_id,tax_category,tax_amount_percent,tax_scheme_id,tax_scheme_agency_id):
+        entry=[]
+        for item in amounts:
+            currency_id = item['currency_id']
+            amount = item['amount']
+            entry.append(
+            {'cbc:TaxAmount':{
+            '@currencyID': currency_id,
+            '$':f'Decimal({amount})'
+            }}
+
+            )
+        sub_entry={
+            'cac:TaxSubtotal':
+            [{'cbc:TaxableAmount':{
+            '@currencyID': currency_id,
+            '$':f'Decimal({taxable_amount})'
+            },
+            'cbc:TaxAmount':{
+            '@currencyID': currency_id,
+            '$':f'Decimal({tax_amount})'
+            }, 
+            'cac:TaxCategory': 
+            {'cbc:ID': 
+             {'@schemeID':scheme_id,
+              '@schemeAgencyID': scheme_agency_id, 
+              '$': tax_category
+            }
+            ,
+            'cbc:Percent':{
+            '@currencyID': currency_id,
+            '$':f'Decimal({tax_amount_percent})'
+            },
+            'cac:TaxScheme':{
+            'cbc:ID': 
+            {'@schemeID':tax_scheme_id,
+              '@schemeAgencyID': tax_scheme_agency_id, 
+              '$': tax_category
+            }
+            }}}
+            ]}
+        entry.append(sub_entry)
+                       
+                       
+
+        
+
+
+        entry=[{'cbc:TaxAmount':{
+            '@currencyID': currency_id,
+            '$':f'Decimal({amount})'
+            }}]
+        self.invoiceData['cac:PaymentMeans']=entry
+
+    def set_legal_monetary_total(self,currency_id,line_extension_amount,tax_exclusive_amount,tax_inclusive_amount,allowance_total_amount,prepaid_amount,payable_amount):
+        entry={{'cbc:LineExtensionAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({line_extension_amount})'
+            },
+            'cbc:TaxExclusiveAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({tax_exclusive_amount})'
+            },
+            'cbc:TaxInclusiveAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({tax_inclusive_amount})'
+            },
+            'cbc:AllowanceTotalAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({allowance_total_amount})'
+            },
+             'cbc:PrepaidAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({prepaid_amount})'
+            },
+            'cbc:PayableAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({payable_amount})'
+            },
+            }}
+        self.invoiceData['cac:LegalMonetaryTotal']=entry
+    
+    def set_invoice_line(self,id,unit_code,invoiced_quantity,currency_id,line_extension_amount,tax_total,rounding_amount,cbc_name,classified_tax_category_percent,tax_scheme):
+        entry=[{
+            'cbc:ID': id,
+            'cbc:InvoicedQuantity': {
+            '@unitCode': unit_code,
+            '$':f'Decimal(\'{invoiced_quantity}\')',
+            'cbc:LineExtensionAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({line_extension_amount})'
+            },
+            'cac:TaxTotal': [{
+            'cbc:TaxAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({tax_total})'
+            },
+             'cbc:RoundingAmount': {
+            '@currencyID': currency_id,
+            '$':f'Decimal({rounding_amount})'
+            }
+            }],
+            'cac:Item': {'cbc:Name': cbc_name,
+            'cac:ClassifiedTaxCategory':[{
+            'cbc:ID': id, 
+            'cbc:Percent': f'Decimal(\'{classified_tax_category_percent}\')', 
+            'cac:TaxScheme': {
+            'cbc:ID': tax_scheme
+            }
+            }]
+            }}}]
+        self.invoiceData['cac:InvoiceLine']=entry
+
+
+    def generateXML(self):
+        schema = xmlschema.XMLSchema('ksa_eis/private/files/xsd/maindoc/UBL-Invoice-2.1.xsd')
+        #schema = xmlschema.XMLSchema('ksa_eis/private/files/UBL-Invoice-2.1.xsd')
+        dict = schema.to_dict('ksa_eis/private/files/Standard_Invoice.xml')
+        print(dict['cac:AdditionalDocumentReference'])
+        for item in self.invoiceData:
+            dict[item]=self.invoiceData[item]
+        
+        xml = schema.encode(dict)
+        xml = xmlschema.etree_tostring(xml)
+        return xml
+
+
+
+if __name__ == '__main__':
+    #xml=generateXML({'cbc:ProfileID':'test'})
+    #print(xml)
+    xml=ZATCAXML()
+    xml.set_invoice_counter_value('test')
+    xml.set_previous_invoice_hash('NWZlY2ViNjZmZmM4NmYzOGQ5NTI3ODZjNmQ2OTZjNzljMmRiYzIzOWRkNGU5MWI0NjcyOWQ3M2EyN2ZiNTdlOQ==')
+    xml.set_invoice_qr_code('SOMEQRCODE')
+    print(xml.generateXML())

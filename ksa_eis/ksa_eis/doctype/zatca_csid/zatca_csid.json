@@ -10,11 +10,15 @@
  "field_order": [
   "csr",
   "otp",
+  "issue_date",
+  "expiry_date",
   "csid",
   "secret",
+  "request_id",
   "status",
   "prod_csid",
-  "prod_secret"
+  "prod_secret",
+  "prod_request_id"
  ],
  "fields": [
   {
@@ -59,11 +63,35 @@
    "fieldtype": "Data",
    "label": "Prod Secret",
    "read_only": 1
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "request_id",
+   "fieldtype": "Data",
+   "label": "Request ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prod_request_id",
+   "fieldtype": "Data",
+   "label": "Prod Request ID",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-02 10:15:04.001553",
+ "modified": "2023-02-11 11:14:12.799405",
  "modified_by": "Administrator",
  "module": "KSA EIS",
  "name": "ZATCA CSID",

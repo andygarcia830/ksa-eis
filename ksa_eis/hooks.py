@@ -190,3 +190,9 @@ app_license = "MIT"
 # auth_hooks = [
 #	"ksa_eis.auth.validate"
 # ]
+
+fixtures = [
+    # export only those records that match the filters from the Role table
+    {"dt": "Role", "filters": [["role_name", "like", "ZATCA%"]]},
+	{"dt": "Module Profile", "filters": [["module_profile_name", "like", "ZATCA%"]]},
+]

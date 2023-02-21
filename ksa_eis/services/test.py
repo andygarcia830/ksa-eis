@@ -1,10 +1,14 @@
-import datetime
+import subprocess
+import frappe
 
 import sys
-#sys.path.append('/home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_csr')
-sys.path.append('ksa_eis/ksa_eis/doctype/zatca_csr')
-import zatca_csr
 
-now=datetime.datetime.now()
-n=now.strftime("%Y/%m/%m-%H:%M:%S")
-print(n)
+
+@frappe.whitelist()
+def test():
+    output=str(subprocess.check_output('source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/services/test.sh',shell=True))
+    print(output)
+
+
+if __name__ == '__main__':
+    test()

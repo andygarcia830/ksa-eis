@@ -2,6 +2,22 @@
 // For license information, please see license.txt
 
  frappe.ui.form.on("ZATCA CSR", {
+    refresh(frm){
+         frm.add_custom_button(
+             __('Generate CSID'),function(){
+                 frappe.set_route("zatca-csid", "new",
+                 {"csr": frm.doc.name});
+             }
+         );
+        console.log('calling test');
+        frappe.call({method:'ksa_eis.services.test.test', args:{
+             },
+             callback:function(r){
+                 console.log(r.message)
+             }
+            });
+    },
+
     before_save(frm) {
         frappe.call({method:'ksa_eis.ksa_eis.doctype.zatca_csr.zatca_csr.generate_csr', args:{
             common_name : frm.doc.common_name,
