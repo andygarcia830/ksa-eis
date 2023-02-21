@@ -8,6 +8,7 @@ import json
 import qrcode
 
 from frappe.model.document import Document
+from frappe.utils import get_site_base_path
 
 class ZATCAInvoice(Document):
 	pass
@@ -29,9 +30,9 @@ def populate_xml(f):
 
 @frappe.whitelist()
 def process_file(f):
-	doc_root='/home/andy/frappe-bench/sites/erpnext'
+	doc_root=get_site_base_path()
 	f=doc_root+f
-	cmd=f'source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/process_files.sh {f}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/process_files.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -59,10 +60,10 @@ def extract_validate_results(result ):
 
 @frappe.whitelist()
 def generate_json(f):
-	doc_root='/home/andy/frappe-bench/sites/erpnext'
+	doc_root=get_site_base_path()
 	f=doc_root+f
 	t = f +'.json'
-	cmd=f'source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_json.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_json.sh {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -101,10 +102,10 @@ def submit_report(csid,jsn):
 
 @frappe.whitelist()
 def generate_qr(f):
-	doc_root='/home/andy/frappe-bench/sites/erpnext'
+	doc_root=get_site_base_path()
 	f=doc_root+f
 	t = f +'.json'
-	cmd=f'source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_qr.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_qr.sh {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -118,7 +119,7 @@ def generate_qr(f):
 
 @frappe.whitelist()
 def generate_qr_image(qrString,fileName):
-	docRoot='/home/andy/frappe-bench//sites/assets/zatca_qrcode/'
+	docRoot='./assets/zatca_qrcode/'
 	fileName=docRoot+fileName+".png"
 	print('\n\n\ngenerating QR Image in '+fileName)
 	img = qrcode.make(qrString)

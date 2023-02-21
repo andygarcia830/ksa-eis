@@ -9,11 +9,10 @@ import json
 import qrcode
 import subprocess
 import sys
-#sys.path.append('/home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_csr')
 import ksa_eis.ksa_eis.doctype.zatca_csr.zatca_csr
 
 from frappe.model.document import Document
-
+from frappe.utils import get_site_base_path
 
 class ZATCAInvoiceBatchUpload(Document):
 	pass
@@ -22,7 +21,7 @@ class ZATCAInvoiceBatchUpload(Document):
 
 def process_batch(zatca_csid,f,type,auto_report):
 	print(f'\n\n\AUTO_REPORT={auto_report}\n\n')
-	doc_root='/home/andy/frappe-bench/sites/erpnext/'
+	doc_root=get_site_base_path()
 	f=doc_root+f
 	print(f'\n\nPROCESSING {f}\n\n')
 	x=''
@@ -85,7 +84,7 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report):
 #
 
 def process_file(f):
-	cmd=f'source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice_batch_upload/process_files.sh {f}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/process_files.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -114,7 +113,7 @@ def extract_validate_results(result ):
 @frappe.whitelist()
 def generate_json(f):
 	t = f +'.json'
-	cmd=f'source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice_batch_upload/generate_json.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_json.sh  {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -154,7 +153,7 @@ def submit_report(csid,jsn):
 @frappe.whitelist()
 def generate_qr(f):
 	t = f +'.json'
-	cmd=f'source /home/andy/frappe-bench/apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice_batch_upload/generate_qr.sh {f} {t}'
+	cmd=f'source ../apps/ksa_eis/ksa_eis/ksa_eis/doctype/zatca_invoice/generate_qr.sh {f} {t}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))
@@ -168,7 +167,7 @@ def generate_qr(f):
 
 @frappe.whitelist()
 def generate_qr_image(qrString,fileName):
-	docRoot='/home/andy/frappe-bench//sites/assets/zatca_qrcode/'
+	docRoot='./assets/zatca_qrcode/'
 	fileName=docRoot+fileName+".png"
 	print('\n\n\ngenerating QR Image in '+fileName)
 	img = qrcode.make(qrString)
