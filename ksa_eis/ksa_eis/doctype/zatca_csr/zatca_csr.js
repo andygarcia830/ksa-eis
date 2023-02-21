@@ -9,7 +9,14 @@
                  {"csr": frm.doc.name});
              }
          );
-        },
+        console.log('calling test');
+        frappe.call({method:'ksa_eis.services.test.test', args:{
+             },
+             callback:function(r){
+                 console.log(r.message)
+             }
+            });
+    },
 
     before_save(frm) {
         frappe.call({method:'ksa_eis.ksa_eis.doctype.zatca_csr.zatca_csr.generate_csr', args:{
