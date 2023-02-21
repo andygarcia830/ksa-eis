@@ -1,0 +1,75 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"UoGdK2Xp-I\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">ZATCA EIS</span>\",\"col\":12}},{\"id\":\"s7SLAYDRTT\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":12}}]",
+ "creation": "2023-02-03 12:08:00.319068",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "table",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "ZATCA EIS",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quick Links",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ZATCA CSR",
+   "link_count": 0,
+   "link_to": "ZATCA CSR",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ZATCA CSID",
+   "link_count": 0,
+   "link_to": "ZATCA CSID",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ZATCA INVOICE",
+   "link_count": 0,
+   "link_to": "ZATCA Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "INVOICE BATCH UPLOAD",
+   "link_count": 0,
+   "link_to": "ZATCA Invoice Batch Upload",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-02-21 14:49:38.796539",
+ "modified_by": "Administrator",
+ "module": "KSA EIS",
+ "name": "ZATCA EIS",
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 24.0,
+ "shortcuts": [],
+ "title": "ZATCA EIS"
+}
