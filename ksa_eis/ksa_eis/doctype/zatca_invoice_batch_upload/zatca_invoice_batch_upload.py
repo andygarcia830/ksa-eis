@@ -42,11 +42,11 @@ def process_batch(zatca_csid,f,type,auto_report):
 	dt=now.strftime("%Y-%m-%m-%H:%M:%S")
 	for entry in xArr:
 		if (len(entry)>0):
-			process_doc(f,ctr,f'{d}\n{entry}',dt,zatca_csid,type,auto_report)
+			process_doc(f,ctr,f'{d}\n{entry}',dt,zatca_csid,type,auto_report,'internal_bacth_upload')
 		ctr+=1
 
 
-def process_doc(f,ctr,entry,dt,csid,type,auto_report):
+def process_doc(f,ctr,entry,dt,csid,type,auto_report,ref_id):
 	f=f'{f}.{dt}.{ctr}'
 	try:
 		fl = open(f, "w")
@@ -61,6 +61,7 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report):
 	doc.xml_file=f
 	doc.invoice_type=type
 	doc.status='UNREPORTED'
+	doc.external_reference_id=ref_id
 	r=process_file(f)
 	print('FILE='+f)
 	print('CSID='+csid)
@@ -205,7 +206,7 @@ def submit_xmls(xmls):
 		f='INVOICE-'+csidstring+"-"+dt+"-"+random_string+'.xml'
 		f=doc_root+"/private/files/"+f
 		if (len(xml)>0):
-			itemvalidation['result']=process_doc(f,ctr,xml,'external',zatca_csid,type,'0')
+			itemvalidation['result']=process_doc(f,ctr,xml,'external',zatca_csid,type,'0',entry['ref_id'])
 		else:	
 			itemvalidation['result']='ERROR: EMPTY XML'
 		ctr+=1

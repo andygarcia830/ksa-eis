@@ -22,7 +22,8 @@
   "status_column",
   "status",
   "status_message",
-  "qr_code"
+  "qr_code",
+  "external_reference_id"
  ],
  "fields": [
   {
@@ -116,11 +117,16 @@
    "fieldtype": "Text",
    "label": "QR Code Text",
    "read_only": 1
+  },
+  {
+   "fieldname": "external_reference_id",
+   "fieldtype": "Data",
+   "label": "External Reference ID"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-22 07:50:53.893160",
+ "modified": "2023-02-22 12:17:11.103667",
  "modified_by": "Administrator",
  "module": "KSA EIS",
  "name": "ZATCA Invoice",
