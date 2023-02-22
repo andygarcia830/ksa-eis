@@ -12,6 +12,7 @@ import sys
 import random
 import string
 import ksa_eis.ksa_eis.doctype.zatca_csr.zatca_csr
+import os
 
 from frappe.model.document import Document
 from frappe.utils import get_site_base_path
@@ -82,8 +83,11 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report,ref_id):
 		doc.status='REPORTED'
 		r=submit_report(csid,doc.json_request)
 		doc.status_message=r
-	doc.check_permission(permtype='write')
-	doc.insert()
+	# Save only if all checks passed and JSON is created
+	if(len(doc.json_request) > 0):
+		doc.check_permission(permtype='write')
+		doc.insert()
+		frappe.db.commit() # Need this for Externally originating API Calls
 
 	return doc.validation_result
 	
@@ -92,7 +96,12 @@ def process_file(f):
 	cmd=f'../apps/ksa_eis/ksa_eis/services/process_files.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
-	result= str(subprocess.check_output(cmd,shell=True))
+	result=''
+	try:
+		result= str(subprocess.check_output(cmd,shell=True))
+	except:
+		result='INVALID XML FORMAT'
+
 	print(result)
 	resultArr=extract_validate_results(result)
 	print(resultArr)
@@ -124,6 +133,7 @@ def generate_json(f):
 	result= str(subprocess.check_output(cmd,shell=True))
 	print(result)
 	print(f'\n\READONG TARGET JSON {t}')
+	x=''
 	try:
 		fl = open(t, "r")
 		x=fl.read()
@@ -169,10 +179,16 @@ def generate_qr(f):
 	return result
 
 
+def checkdir(dir):
+	if not os.path.exists(dir):
+		os.mkdir(dir)
+
 
 @frappe.whitelist()
 def generate_qr_image(qrString,fileName):
 	docRoot='./assets/zatca_qrcode/'
+	# make sure the directory exists!
+	checkdir(docRoot)
 	fileName=docRoot+fileName+".png"
 	print('\n\n\ngenerating QR Image in '+fileName)
 	img = qrcode.make(qrString)

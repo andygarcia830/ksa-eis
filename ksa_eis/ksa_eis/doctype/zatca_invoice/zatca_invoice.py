@@ -6,6 +6,7 @@ import subprocess
 import requests
 import json
 import qrcode
+import os
 
 from frappe.model.document import Document
 from frappe.utils import get_site_base_path
@@ -115,11 +116,15 @@ def generate_qr(f):
 	print(result)
 	return result
 
-
+def checkdir(dir):
+	if not os.path.exists(dir):
+		os.mkdir(dir)
 
 @frappe.whitelist()
 def generate_qr_image(qrString,fileName):
 	docRoot='./assets/zatca_qrcode/'
+	# make sure the directory exists!
+	checkdir(docRoot)
 	fileName=docRoot+fileName+".png"
 	print('\n\n\ngenerating QR Image in '+fileName)
 	img = qrcode.make(qrString)
