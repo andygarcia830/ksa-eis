@@ -195,4 +195,6 @@ fixtures = [
     # export only those records that match the filters from the Role table
     {"dt": "Role", "filters": [["role_name", "like", "ZATCA%"]]},
 	{"dt": "Module Profile", "filters": [["module_profile_name", "like", "ZATCA%"]]},
+    {"dt": "ZATCA CSID"},
+    {"dt": "ZATCA CSR"},
 ]
