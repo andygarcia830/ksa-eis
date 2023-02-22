@@ -9,6 +9,8 @@ import json
 import qrcode
 import subprocess
 import sys
+import random
+import string
 import ksa_eis.ksa_eis.doctype.zatca_csr.zatca_csr
 
 from frappe.model.document import Document
@@ -53,13 +55,15 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report):
 	except:
 		pass
 	doc = frappe.new_doc('ZATCA Invoice')
-	doc.title = "EIS-BATCH-"+dt+"-"+str(ctr)
+	#doc.title = "EIS-BATCH-"+dt+"-"+str(ctr)
 	doc.xml_document=entry
 	doc.zatca_csid=csid
 	doc.xml_file=f
 	doc.invoice_type=type
 	doc.status='UNREPORTED'
 	r=process_file(f)
+	print('FILE='+f)
+	print('CSID='+csid)
 	print('VALIDATION RESULT='+r)
 	doc.validation_result=str(r)
 	r=generate_json(f)
@@ -78,6 +82,7 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report):
 		r=submit_report(csid,doc.json_request)
 		doc.status_message=r
 	doc.insert()
+	return doc.validation_result
 	
 
 def process_file(f):
@@ -172,3 +177,46 @@ def generate_qr_image(qrString,fileName):
 	img.save(fileName)
 
 
+@frappe.whitelist()
+def submit_xmls(xmls):
+	#print(f'\n\n\AUTO_REPORT={auto_report}\n\n')
+	now=datetime.datetime.now()
+	dt=now.strftime("%Y-%m-%m-%H:%M:%S")
+	random_string=get_random_string()
+	
+	doc_root=get_site_base_path()
+	
+	#print(f'\n\nPROCESSING {f}\n\n')
+	# d='<?xml version="1.0" encoding="UTF-8"?>'
+	# xArr=xmls.split(d)
+	# print(f'xArr size={len(xArr)}')
+	validationresult = []
+	
+	ctr=0
+
+	for entry in xmls:
+		itemvalidation={}
+		itemvalidation['ref_id']=entry['ref_id']
+		zatca_csid= entry['zatca_csid']
+		csidstring=zatca_csid.replace(' ','_')
+		type = entry['type']
+		auto_report=entry['auto_report']
+		xml=entry['xml']
+		f='INVOICE-'+csidstring+"-"+dt+"-"+random_string+'.xml'
+		f=doc_root+"/private/files/"+f
+		if (len(xml)>0):
+			itemvalidation['result']=process_doc(f,ctr,xml,'external',zatca_csid,type,'0')
+		else:	
+			itemvalidation['result']='ERROR: EMPTY XML'
+		ctr+=1
+		validationresult.append(itemvalidation)
+	
+	return validationresult
+
+		
+def get_random_string():
+    # choose from all lowercase letter
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(8))
+    print("Random string of length", 8, "is:", result_str)
+    return result_str
