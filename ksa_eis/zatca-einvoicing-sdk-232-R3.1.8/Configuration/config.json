@@ -1,11 +1,11 @@
 {
-  "xsdPath": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/Schemas/xsds/UBL2.1/xsd/maindoc/UBL-Invoice-2.1.xsd",
-  "enSchematron": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/Rules/schematrons/CEN-EN16931-UBL.xsl",
-  "zatcaSchematron": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/Rules/schematrons/20210819_ZATCA_E-invoice_Validation_Rules.xsl",
-  "certPath": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/Certificates/cert.pem",
-  "privateKeyPath": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/Certificates/ec-secp256k1-priv-key.pem",
-  "pihPath": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/PIH/pih.txt",
+  "xsdPath": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/Schemas/xsds/UBL2.1/xsd/maindoc/UBL-Invoice-2.1.xsd",
+  "enSchematron": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/Rules/schematrons/CEN-EN16931-UBL.xsl",
+  "zatcaSchematron": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/Rules/schematrons/20210819_ZATCA_E-invoice_Validation_Rules.xsl",
+  "certPath": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/Certificates/cert.pem",
+  "privateKeyPath": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/Certificates/ec-secp256k1-priv-key.pem",
+  "pihPath": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/PIH/pih.txt",
   "certPassword": "123456789",
-  "inputPath": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Data/Input",
-  "usagePathFile": "/home/andy/Work/KSA-ZATCA-EIS/SDK/zatca-einvoicing-sdk-232-R3.1.8/Configuration/usage.txt"
+  "inputPath": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Data/Input",
+  "usagePathFile": "../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Configuration/usage.txt"
 }
