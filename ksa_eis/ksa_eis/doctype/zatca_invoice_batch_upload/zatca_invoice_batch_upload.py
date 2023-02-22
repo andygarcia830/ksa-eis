@@ -82,7 +82,9 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report,ref_id):
 		doc.status='REPORTED'
 		r=submit_report(csid,doc.json_request)
 		doc.status_message=r
+	doc.check_permission(permtype='write')
 	doc.insert()
+
 	return doc.validation_result
 	
 
