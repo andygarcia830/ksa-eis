@@ -13,6 +13,8 @@ export INPUT_PATH=$1
 
 pathadd  $FATOORA_HOME
 pathadd ../apps/ksa_eis/ksa_eis/jre1.8.0_361/bin
+pathadd /usr/bin
+
 
 #command_string="fatoora -csr -csrConfig \"$INPUT_PATH/csr-config.properties\" -generatedCsr \"$INPUT_PATH/generated_csr.csr\""
 #echo $command_string
