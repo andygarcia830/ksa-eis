@@ -33,7 +33,7 @@ def populate_xml(f):
 def process_file(f):
 	doc_root=get_site_base_path()
 	f=doc_root+f
-	cmd=f'../apps/ksa_eis/ksa_eis/services/process_files.sh {f}'
+	cmd=f'../apps/ksa_eis/ksa_eis/services/validate_invoice.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result= str(subprocess.check_output(cmd,shell=True))

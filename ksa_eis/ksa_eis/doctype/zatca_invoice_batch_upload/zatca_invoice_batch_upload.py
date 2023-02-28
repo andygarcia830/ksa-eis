@@ -93,7 +93,7 @@ def process_doc(f,ctr,entry,dt,csid,type,auto_report,ref_id):
 	
 
 def process_file(f):
-	cmd=f'../apps/ksa_eis/ksa_eis/services/process_files.sh {f}'
+	cmd=f'../apps/ksa_eis/ksa_eis/services/validate_invoice.sh {f}'
 	print(f'\n\nPROCESSING {f}')
 	print(f'COMMAND={cmd}\n\n')
 	result=''
