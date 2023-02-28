@@ -1,13 +1,11 @@
 #!/bin/bash
 
-JAVA_HOME=../apps/ksa_eis/ksa_eis/jre1.8.0_361/bin/
-
 EXTVER=$(jq -r '.version' ${FATOORA_HOME}/global.json)
 
 CERTPASSWORD=$(jq -r '.certPassword' ${FATOORA_HOME}/global.json)
 
 
-$JAVA_HOME/java -Djdk.module.illegalAccess=deny -Djdk.sunec.disableNative=false -jar ${FATOORA_HOME}/zatca-einvoicing-sdk-${EXTVER}.jar --globalVersion $EXTVER -certpassword $CERTPASSWORD $1 $2 $3 $4 $5 $6
+java -Djdk.module.illegalAccess=deny -Djdk.sunec.disableNative=false -jar ${FATOORA_HOME}/zatca-einvoicing-sdk-${EXTVER}.jar --globalVersion $EXTVER -certpassword $CERTPASSWORD $1 $2 $3 $4 $5 $6
 
 
 
