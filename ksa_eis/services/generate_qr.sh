@@ -9,8 +9,8 @@ pathadd() {
 export FATOORA_HOME=../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Apps
 export SDK_CONFIG=../apps/ksa_eis/ksa_eis/zatca-einvoicing-sdk-232-R3.1.8/Configuration/config.json
 
-#pathadd  $FATOORA_HOME
-#pathadd ../apps/ksa_eis/ksa_eis/jre1.8.0_361/bin
+pathadd  $FATOORA_HOME
+pathadd ../apps/ksa_eis/ksa_eis/jdk-19.0.2/bin
 
 echo $1
 $FATOORA_HOME/fatoora -qr -invoice "$1"
