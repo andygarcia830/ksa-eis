@@ -273,7 +273,7 @@ class ZATCAXML:
         schema = xmlschema.XMLSchema('ksa_eis/private/files/xsd/maindoc/UBL-Invoice-2.1.xsd')
         #schema = xmlschema.XMLSchema('ksa_eis/private/files/UBL-Invoice-2.1.xsd')
         dict = schema.to_dict('ksa_eis/private/files/Standard_Invoice.xml')
-        print(dict['cac:AdditionalDocumentReference'])
+        print(dict)
         for item in self.invoiceData:
             dict[item]=self.invoiceData[item]
         

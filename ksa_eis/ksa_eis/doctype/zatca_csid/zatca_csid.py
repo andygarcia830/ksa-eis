@@ -11,7 +11,7 @@ class ZATCACSID(Document):
 	pass
 
 def call_compliance(otp,csr):
-	url = 'https://gw-apic-gov.gazt.gov.sa/e-invoicing/developer-portal/compliance'
+	url = 'https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/compliance'
 	hdrs = {'accept':'application/json','OTP': str(otp),'Accept-Version':'V2'}
 	bdy = {'csr':csr}
 	x = requests.post(url, json=bdy, headers=hdrs)
@@ -22,7 +22,7 @@ def call_compliance(otp,csr):
 	return x.text
 
 def call_csid_onboading(csid,secret,jsn):
-	url = 'https://gw-apic-gov.gazt.gov.sa/e-invoicing/developer-portal/production/csids'
+	url = 'https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/production/csids'
 	#url = 'http://localhost:8000'
 	
 	hdrs = {'Accept-Language':'en','Accept-Version':'V2'}

@@ -83,7 +83,7 @@ def submit_report(csid,jsn):
 	doc=frappe.get_doc('ZATCA CSID',csid)
 	print(f'USING CSID={doc.prod_csid} secret={doc.prod_secret}')
 	jsnArr=json.loads(jsn)
-	url = 'https://gw-apic-gov.gazt.gov.sa/e-invoicing/developer-portal/invoices/reporting/single'
+	url = 'https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal/invoices/reporting/single'
 	#url = 'http://localhost:8000'
 	hdrs = {'Accept-Language':'en','Accept-Version':'V2','Clearance-Status':'0'}
 	x = requests.post(url, json=jsnArr, headers=hdrs,auth=(doc.prod_csid,doc.prod_secret))
